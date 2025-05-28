@@ -63,19 +63,13 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 5. **Paste it into the .env file** as ROOT_DATABASE_PASSWORD=, so it looks like
 
-`DATABASE_PASSWORD=`
-
-`ROOT_DATABASE_PASSWORD=yourpasswordhere`
-
-`CROWDSEC_BOUNCER_APIKEY=`
-
-`POSTGRES_PASSWORD=`
-
-`POSTGRES_USER=`
-
-`POSTGRES_DB=`
-
-`AUTHENTIK_SECRET_KEY=`
+```DATABASE_PASSWORD=
+ROOT_DATABASE_PASSWORD=yourpasswordhere
+CROWDSEC_BOUNCER_APIKEY=
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=
+AUTHENTIK_SECRET_KEY=```
 
 6. **Generate a password for NPM's database**
 
@@ -83,19 +77,13 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 7. **Paste it into the .env file** as DATABASE_PASSWORD=, so it looks like
 
-`DATABASE_PASSWORD=yourpasswordhere`
-
-`ROOT_DATABASE_PASSWORD=yourpasswordhere`
-
-`CROWDSEC_BOUNCER_APIKEY=`
-
-`POSTGRES_PASSWORD=`
-
-`POSTGRES_USER=`
-
-`POSTGRES_DB=`
-
-`AUTHENTIK_SECRET_KEY=`
+```DATABASE_PASSWORD=yourpasswordhere
+ROOT_DATABASE_PASSWORD=yourpasswordhere
+CROWDSEC_BOUNCER_APIKEY=
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=
+AUTHENTIK_SECRET_KEY=```
 
 >*Even though we will be setting up Authentik last, we'll fill it's variables now, so that we can compose. The bouncer API key will come later.*
 
@@ -105,35 +93,23 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 9. **Paste it into the .env file** as POSTGRES_PASSWORD=, so it looks like
 
-`DATABASE_PASSWORD=yourpasswordhere`
-
-`ROOT_DATABASE_PASSWORD=yourpasswordhere`
-
-`CROWDSEC_BOUNCER_APIKEY=`
-
-`POSTGRES_PASSWORD=yourpasswordhere`
-
-`POSTGRES_USER=`
-
-`POSTGRES_DB=`
-
-`AUTHENTIK_SECRET_KEY=`
+```DATABASE_PASSWORD=yourpasswordhere
+ROOT_DATABASE_PASSWORD=yourpasswordhere
+CROWDSEC_BOUNCER_APIKEY=
+POSTGRES_PASSWORD=yourpasswordhere
+POSTGRES_USER=
+POSTGRES_DB=
+AUTHENTIK_SECRET_KEY=```
 
 10. **Choose** whatever **DB name and USER** name you want, or generate these as well
 
-`DATABASE_PASSWORD=yourpasswordhere`
-
-`ROOT_DATABASE_PASSWORD=yourpasswordhere`
-
-`CROWDSEC_BOUNCER_APIKEY=`
-
-`POSTGRES_PASSWORD=yourpasswordhere`
-
-`POSTGRES_USER=authentik_db_user`
-
-`POSTGRES_DB=authentik_db`
-
-`AUTHENTIK_SECRET_KEY=`
+```DATABASE_PASSWORD=yourpasswordhere
+ROOT_DATABASE_PASSWORD=yourpasswordhere
+CROWDSEC_BOUNCER_APIKEY=
+POSTGRES_PASSWORD=yourpasswordhere
+POSTGRES_USER=authentik_db_user
+POSTGRES_DB=authentik_db
+AUTHENTIK_SECRET_KEY=```
 
 11. **Generate the Authentik secret key**
 
@@ -141,19 +117,13 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 12. **Paste it into the .env file** as AUTHENTIK_SECRET_KEY=, so it looks like
 
-`DATABASE_PASSWORD=yourpasswordhere`
-
-`ROOT_DATABASE_PASSWORD=yourpasswordhere`
-
-`CROWDSEC_BOUNCER_APIKEY=`
-
-`POSTGRES_PASSWORD=yourpasswordhere`
-
-`POSTGRES_USER=authentik_db_user`
-
-`POSTGRES_DB=authentik_db`
-
-`AUTHENTIK_SECRET_KEY=yoursecretkey`
+```DATABASE_PASSWORD=yourpasswordhere
+ROOT_DATABASE_PASSWORD=yourpasswordhere
+CROWDSEC_BOUNCER_APIKEY=
+POSTGRES_PASSWORD=yourpasswordhere
+POSTGRES_USER=authentik_db_user
+POSTGRES_DB=authentik_db
+AUTHENTIK_SECRET_KEY=yoursecretkey```
 
 >I **STRONGLY** recommend reading the provided ***docker-compose.yaml*** file. I even included a few comments so it's *more easily* understandable.
 
@@ -173,19 +143,13 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 16. **Paste the key into the .env file** as CROWDSEC_BOUNCER_APIKEY=, so it looks like
 
-`DATABASE_PASSWORD=yourpasswordhere`
-
-`ROOT_DATABASE_PASSWORD=yourpasswordhere`
-
-`CROWDSEC_BOUNCER_APIKEY=yourbouncerapikey`
-
-`POSTGRES_PASSWORD=yourpasswordhere`
-
-`POSTGRES_USER=authentik_db_user`
-
-`POSTGRES_DB=authentik_db`
-
-`AUTHENTIK_SECRET_KEY=yoursecretkey`
+```DATABASE_PASSWORD=yourpasswordhere
+ROOT_DATABASE_PASSWORD=yourpasswordhere
+CROWDSEC_BOUNCER_APIKEY=yourbouncerapikey
+POSTGRES_PASSWORD=yourpasswordhere
+POSTGRES_USER=authentik_db_user
+POSTGRES_DB=authentik_db
+AUTHENTIK_SECRET_KEY=yoursecretkey```
 
 17. Everything Docker-related should be done now, we can **compose again**
 
