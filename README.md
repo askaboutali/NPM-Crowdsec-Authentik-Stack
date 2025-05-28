@@ -29,7 +29,7 @@ Maybe if you're ***renting a VPS*** that you don't care about as much - in that 
 Of course, all of the above **ONLY applies** assuming that that everything is ***properely deployed and configured*** *(which it likely isn't - given the fact I made it)*, as well as ***properely maintained***.
 
 I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** if you compromise your security with this setup.
-> If you actually want to you this setup to be proper, and learn more, you should realistically be reading the ***official documentation*** for each of the services used, not my GitHub :)
+> If you actually want this setup to be properely done, and wish to learn more, you should realistically be reading the ***official documentation*** for each of the services used, not my GitHub :)
 
 ## Requirements
 
