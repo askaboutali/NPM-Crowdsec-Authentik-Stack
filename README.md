@@ -210,7 +210,7 @@ AUTHENTIK_SECRET_KEY=yoursecretkey
 
 26. ***IMPORTANT:*** **Open the provider you created in Authentik, and copy the Nginx (Proxy Manager) config.**
 
-27. **Open the hello-test proxy provider in NPM, click Advanced and paste the config.**
+27. **Open the hello-test proxy host in NPM, click Advanced and paste the config.**
 
 > **DO NOT SAVE YET!**
 
