@@ -269,6 +269,7 @@ Afterwards just approve the enroll request in the dashboard :)
 `curl -i -L https://hello-test-url-here`
 
 > You probably get it now :)
+
 > In other words, if the very last response is not *403* something is **VERY** wrong.
 
 ## Issues
