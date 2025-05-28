@@ -130,9 +130,9 @@ POSTGRES_DB=authentik_db
 AUTHENTIK_SECRET_KEY=yoursecretkey
 ```
 
->I **STRONGLY** recommend reading the provided ***docker-compose.yaml*** file. I even included a few comments so it's *more easily* understandable.
-
 13. Now, let's **compose** what we have so far
+
+>I **STRONGLY** recommend reading the provided ***docker-compose.yaml*** file. I even included a few comments so it's *more easily* understandable.
 
 `sudo docker compose up -d`
 
