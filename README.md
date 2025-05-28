@@ -50,93 +50,145 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 `git clone https://this repo`
 
 2. *This is almost definitely unnecessary, but idk*
+
 `sudo chown -R 1000:1000 NPM-Crowdsec-Authentik-Stack`
 
 3. **Get inside the directory**
+
 `cd NPM-Crowdsec-Authentik-Stack`
 
 4. **Generate a root password for NPM's database**
+
 `tr -dc A-Za-z0-9 </dev/urandom | head -c 32`
 
 5. **Paste it into the .env file** as ROOT_DATABASE_PASSWORD=, so it looks like
+
 `DATABASE_PASSWORD=`
+
 `ROOT_DATABASE_PASSWORD=yourpasswordhere`
+
 `CROWDSEC_BOUNCER_APIKEY=`
+
 `POSTGRES_PASSWORD=`
+
 `POSTGRES_USER=`
+
 `POSTGRES_DB=`
+
 `AUTHENTIK_SECRET_KEY=`
 
 6. **Generate a password for NPM's database**
+
 `tr -dc A-Za-z0-9 </dev/urandom | head -c 32`
 
 7. **Paste it into the .env file** as DATABASE_PASSWORD=, so it looks like
+
 `DATABASE_PASSWORD=yourpasswordhere`
+
 `ROOT_DATABASE_PASSWORD=yourpasswordhere`
+
 `CROWDSEC_BOUNCER_APIKEY=`
+
 `POSTGRES_PASSWORD=`
+
 `POSTGRES_USER=`
+
 `POSTGRES_DB=`
+
 `AUTHENTIK_SECRET_KEY=`
 
 >*Even though we will be setting up Authentik last, we'll fill it's variables now, so that we can compose. The bouncer API key will come later.*
 
 8. **Generate a Postgresql password for Authentik**
+
 `openssl rand -base64 36`
 
 9. **Paste it into the .env file** as POSTGRES_PASSWORD=, so it looks like
+
 `DATABASE_PASSWORD=yourpasswordhere`
+
 `ROOT_DATABASE_PASSWORD=yourpasswordhere`
+
 `CROWDSEC_BOUNCER_APIKEY=`
+
 `POSTGRES_PASSWORD=yourpasswordhere`
+
 `POSTGRES_USER=`
+
 `POSTGRES_DB=`
+
 `AUTHENTIK_SECRET_KEY=`
 
 10. **Choose** whatever **DB name and USER** name you want, or generate these as well
+
 `DATABASE_PASSWORD=yourpasswordhere`
+
 `ROOT_DATABASE_PASSWORD=yourpasswordhere`
+
 `CROWDSEC_BOUNCER_APIKEY=`
+
 `POSTGRES_PASSWORD=yourpasswordhere`
+
 `POSTGRES_USER=authentik_db_user`
+
 `POSTGRES_DB=authentik_db`
+
 `AUTHENTIK_SECRET_KEY=`
 
 11. **Generate the Authentik secret key**
+
 `openssl rand -base64 60`
 
 12. **Paste it into the .env file** as AUTHENTIK_SECRET_KEY=, so it looks like
+
 `DATABASE_PASSWORD=yourpasswordhere`
+
 `ROOT_DATABASE_PASSWORD=yourpasswordhere`
+
 `CROWDSEC_BOUNCER_APIKEY=`
+
 `POSTGRES_PASSWORD=yourpasswordhere`
+
 `POSTGRES_USER=authentik_db_user`
+
 `POSTGRES_DB=authentik_db`
+
 `AUTHENTIK_SECRET_KEY=yoursecretkey`
 
 >I **STRONGLY** recommend reading the provided ***docker-compose.yaml*** file. I even included a few comments so it's *more easily* understandable.
 
 13. Now, let's **compose** what we have so far
+
 `sudo docker compose up -d`
 
 14. When all is done, we need to **add the Crowdsec NPM bouncer and get our API key**
+
 `sudo docker compose exec crowdsec cscli bouncer add npm-bouncer`
 
 > **DO NOT lose this key!** It's important.
 
 15. We can **stop the stack** now
+
 `sudo docker compose down`
 
 16. **Paste the key into the .env file** as CROWDSEC_BOUNCER_APIKEY=, so it looks like
+
 `DATABASE_PASSWORD=yourpasswordhere`
+
 `ROOT_DATABASE_PASSWORD=yourpasswordhere`
+
 `CROWDSEC_BOUNCER_APIKEY=yourbouncerapikey`
+
 `POSTGRES_PASSWORD=yourpasswordhere`
+
 `POSTGRES_USER=authentik_db_user`
+
 `POSTGRES_DB=authentik_db`
+
 `AUTHENTIK_SECRET_KEY=yoursecretkey`
 
 17. Everything Docker-related should be done now, we can **compose again**
+
 `sudo docker compose up -d`
 
 > If **Docker complains** about Crowdsec's *acquis.yaml* file, you need to remove the crowdsec volume and compose again ***sudo docker volume rm your_volume_name***
@@ -185,6 +237,7 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 > **DO NOT SAVE YET!**
 
 28.  **Modify proxy_pass with authentik-server** *(again with the Docker DNS)*
+
 `proxy_pass              http://authentik-server:9000/outpost.goauthentik.io;`
 
 > Keep port 9000.
