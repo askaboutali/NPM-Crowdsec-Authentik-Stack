@@ -47,7 +47,7 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 1. First, **clone my repo**
 
-`git clone https://this repo`
+`git clone https://github.com/suckharder/NPM-Crowdsec-Authentik-Stack`
 
 2. *This is almost definitely unnecessary, but idk*
 
