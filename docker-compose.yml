@@ -1,0 +1,241 @@
+services:
+
+# Container names ARE important! We rely heavily on Docker DNS.
+
+##############_____NPM_____############################################
+
+  app:
+    # LePresidente NPM fork with crowdsec bouncer
+    image: 'lepresidente/nginxproxymanager:latest'
+    container_name: npm
+    restart: unless-stopped
+    # NPM has access to all networks
+    networks:
+      crowdsec:
+      npm:
+      internal_network:
+    ports:
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      # Only use locally
+      - '81:81' # Admin Web Port
+    environment:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      # Set in .env
+      DB_MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      DB_MYSQL_NAME: "npm"
+      # API_URL relies on Docker DNS, do not change container names
+      # API_KEY set in .env
+      CROWDSEC_OPENRESTY_BOUNCER: |
+        ENABLED=true
+        API_URL=http://crowdsec:8080
+        API_KEY=${CROWDSEC_BOUNCER_APIKEY}
+      # Delete (or set to false) if you want IPv6
+      DISABLE_IPV6: 'true'
+    volumes:
+    # NPM data (including logs)
+      - ./npm_data:/data
+    # NPM TLS certs
+      - ./npm_letsencrypt:/etc/letsencrypt
+    depends_on:
+      db:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges=true
+
+##############_____NPM_MariaDB_____####################################
+
+  db:
+    image: 'mariadb:lts'
+    container_name: maria_db
+    restart: unless-stopped
+    networks:
+      npm:
+    environment:
+      # Set in .env
+      MYSQL_ROOT_PASSWORD: ${ROOT_DATABASE_PASSWORD}
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      # Set in .env
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    security_opt:
+      - no-new-privileges=true
+    healthcheck:
+      test: ['CMD', '/usr/local/bin/healthcheck.sh', '--innodb_initialized']
+      start_period: 5s
+      timeout: 5s
+      interval: 5s
+      retries: 5
+
+##############_____Crowdsec_____#######################################
+
+  crowdsec:
+    image: docker.io/crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    environment:
+      - COLLECTIONS=crowdsecurity/nginx-proxy-manager
+    volumes:
+      - crowdsec-db:/var/lib/crowdsec/data/
+      - crowdsec-config:/etc/crowdsec/
+      # Crowdsec Aquis
+      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      # NPM data (logs) to be read by Crowdsec
+      - ./npm_data/logs/:/var/log/npm:ro
+    networks:
+      crowdsec:
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges=true
+
+##############_____Authentik_Postgresql_____###########################
+
+  postgresql:
+    image: docker.io/library/postgres:16-alpine
+    container_name: authentik-postgresql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - database:/var/lib/postgresql/data
+    networks:
+      - internal_network
+    environment:
+      # Set in .env
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      # Set in .env
+      POSTGRES_USER: ${POSTGRES_USER}
+      # Set in .env
+      POSTGRES_DB: ${POSTGRES_DB}
+
+##############_____Authentik_Redis_____################################
+
+  redis:
+    image: docker.io/library/redis:alpine
+    container_name: authentik-redis
+    command: --save 60 1 --loglevel warning
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    networks:
+      - internal_network
+    volumes:
+      - redis:/data
+
+##############_____Authentik_Server_____###############################
+
+  server:
+    # Check Authentik Docs for recommended pinned version
+    image: ghcr.io/goauthentik/server:2025.4.1
+    container_name: authentik-server
+    restart: unless-stopped
+    command: server
+    environment:
+      # Set in .env
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      # Set in .env
+      AUTHENTIK_POSTGRESQL__USER: ${POSTGRES_USER}
+      # Set in .env
+      AUTHENTIK_POSTGRESQL__NAME: ${POSTGRES_DB}
+      # Set in .env
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD}
+      AUTHENTIK_ERROR_REPORTING__ENABLED: true
+    volumes:
+      - ./authentik-media:/media
+      - ./authentik-custom-templates:/templates
+    networks:
+      npm:
+      internal_network:
+# Leave ports unpublished, access through reverse proxy. Use the commented-out ports for reference. Use 9000 for outpost.
+### ports:
+   #   - "9000:9000"
+   #   - "9443:9443"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+##############_____Authentik_worker_____###############################
+
+  worker:
+    # USE THE SAME IMAGE AS SERVER!!!
+    image: ghcr.io/goauthentik/server:2025.4.1
+    container_name: authentik-worker
+    restart: unless-stopped
+    command: worker
+    environment:
+      # Set in .env
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      # Set in .env
+      AUTHENTIK_POSTGRESQL__USER: ${POSTGRES_USER}
+      # Set in .env
+      AUTHENTIK_POSTGRESQL__NAME: ${POSTGRES_DB}
+      # Set in .env
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD}
+      AUTHENTIK_ERROR_REPORTING__ENABLED: true
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./authentik-media:/media
+      - ./authentik-certs:/certs
+      - ./authentik-custom-templates:/templates
+    networks:
+      internal_network:
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+##############_____SERVICES_BEHIND_PROXY(internal_network)____#########
+
+# These are the protected services hidden behind the proxy, make sure all of them are on the internal_network, and ports are NOT published!
+
+# Our test container
+  hello:
+    image: nginxdemos/hello
+    container_name: hello-test
+    networks:
+      - internal_network
+    restart: unless-stopped
+
+# Your services go here.
+
+##############_____Volumes_and_networks_____###########################
+
+volumes:
+  crowdsec-db:
+  crowdsec-config:
+# NPM mariadb
+  mariadb-data:
+# authentik postgresql
+  database:
+    driver: local
+# authentik redis
+  redis:
+    driver: local
+
+networks:
+  crowdsec:
+    driver: bridge
+  npm:
+    driver: bridge
+# Our internal network - use for services you want to protect
+  internal_network:
+    driver: bridge
