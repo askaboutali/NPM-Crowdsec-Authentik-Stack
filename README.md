@@ -63,7 +63,8 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 
 5. **Paste it into the .env file** as ROOT_DATABASE_PASSWORD=, so it looks like
 
-```DATABASE_PASSWORD=
+```
+DATABASE_PASSWORD=
 ROOT_DATABASE_PASSWORD=yourpasswordhere
 CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=
@@ -78,7 +79,8 @@ AUTHENTIK_SECRET_KEY=
 
 7. **Paste it into the .env file** as DATABASE_PASSWORD=, so it looks like
 
-```DATABASE_PASSWORD=yourpasswordhere
+```
+DATABASE_PASSWORD=yourpasswordhere
 ROOT_DATABASE_PASSWORD=yourpasswordhere
 CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=
@@ -95,7 +97,8 @@ AUTHENTIK_SECRET_KEY=
 
 9. **Paste it into the .env file** as POSTGRES_PASSWORD=, so it looks like
 
-```DATABASE_PASSWORD=yourpasswordhere
+```
+DATABASE_PASSWORD=yourpasswordhere
 ROOT_DATABASE_PASSWORD=yourpasswordhere
 CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=yourpasswordhere
@@ -106,7 +109,8 @@ AUTHENTIK_SECRET_KEY=
 
 10. **Choose** whatever **DB name and USER** name you want, or generate these as well
 
-```DATABASE_PASSWORD=yourpasswordhere
+```
+DATABASE_PASSWORD=yourpasswordhere
 ROOT_DATABASE_PASSWORD=yourpasswordhere
 CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=yourpasswordhere
@@ -121,7 +125,8 @@ AUTHENTIK_SECRET_KEY=
 
 12. **Paste it into the .env file** as AUTHENTIK_SECRET_KEY=, so it looks like
 
-```DATABASE_PASSWORD=yourpasswordhere
+```
+DATABASE_PASSWORD=yourpasswordhere
 ROOT_DATABASE_PASSWORD=yourpasswordhere
 CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=yourpasswordhere
@@ -148,7 +153,8 @@ AUTHENTIK_SECRET_KEY=yoursecretkey
 
 16. **Paste the key into the .env file** as CROWDSEC_BOUNCER_APIKEY=, so it looks like
 
-```DATABASE_PASSWORD=yourpasswordhere
+```
+DATABASE_PASSWORD=yourpasswordhere
 ROOT_DATABASE_PASSWORD=yourpasswordhere
 CROWDSEC_BOUNCER_APIKEY=yourbouncerapikey
 POSTGRES_PASSWORD=yourpasswordhere
