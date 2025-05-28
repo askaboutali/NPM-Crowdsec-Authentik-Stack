@@ -191,6 +191,8 @@ AUTHENTIK_SECRET_KEY=yoursecretkey
 
 > hostname: authentik-server, port: 9443 (SSL port - use scheme: https)
 
+> Authentik Server *uses* **WEBSOCKETS - SET TO ON**
+
 22. Set up **Authentik**
 
 >*Honestly*, just watch this video by **Christian Lempa:** ***https://youtu.be/N5unsATNpJk***, *skip the configuration, as he does not use NPM nor Crowdsec*. Create a new admin user like he does, give the user MFA, disable the default one.
