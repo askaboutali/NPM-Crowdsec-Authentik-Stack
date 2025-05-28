@@ -234,6 +234,8 @@ Afterwards just approve the enroll request in the dashboard :)
 
 # Testing
 
+> **Obligatory "DON'T TEST THIS LOCALLY" PSA.** Make a hotspot from your phone if you need to.
+
 1. **Open hello-test in a web browser**
 
 > If you dont get to an Auth page, something is wrong.
@@ -251,8 +253,6 @@ Afterwards just approve the enroll request in the dashboard :)
 > If the very last response is not a *200*, something is wrong.
 
 4. **Check your external/public IP address**
-
-> **Obligatory "DON'T TEST THIS LOCALLY" PSA.** Make a hotspot from your phone if you need to.
 
 5. **Manually ban your IP in Crowdsec**
 
