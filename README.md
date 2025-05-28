@@ -69,7 +69,8 @@ CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=
 POSTGRES_USER=
 POSTGRES_DB=
-AUTHENTIK_SECRET_KEY=```
+AUTHENTIK_SECRET_KEY=
+```
 
 6. **Generate a password for NPM's database**
 
@@ -83,7 +84,8 @@ CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=
 POSTGRES_USER=
 POSTGRES_DB=
-AUTHENTIK_SECRET_KEY=```
+AUTHENTIK_SECRET_KEY=
+```
 
 >*Even though we will be setting up Authentik last, we'll fill it's variables now, so that we can compose. The bouncer API key will come later.*
 
@@ -99,7 +101,8 @@ CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=yourpasswordhere
 POSTGRES_USER=
 POSTGRES_DB=
-AUTHENTIK_SECRET_KEY=```
+AUTHENTIK_SECRET_KEY=
+```
 
 10. **Choose** whatever **DB name and USER** name you want, or generate these as well
 
@@ -109,7 +112,8 @@ CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=yourpasswordhere
 POSTGRES_USER=authentik_db_user
 POSTGRES_DB=authentik_db
-AUTHENTIK_SECRET_KEY=```
+AUTHENTIK_SECRET_KEY=
+```
 
 11. **Generate the Authentik secret key**
 
@@ -123,7 +127,8 @@ CROWDSEC_BOUNCER_APIKEY=
 POSTGRES_PASSWORD=yourpasswordhere
 POSTGRES_USER=authentik_db_user
 POSTGRES_DB=authentik_db
-AUTHENTIK_SECRET_KEY=yoursecretkey```
+AUTHENTIK_SECRET_KEY=yoursecretkey
+```
 
 >I **STRONGLY** recommend reading the provided ***docker-compose.yaml*** file. I even included a few comments so it's *more easily* understandable.
 
@@ -149,7 +154,8 @@ CROWDSEC_BOUNCER_APIKEY=yourbouncerapikey
 POSTGRES_PASSWORD=yourpasswordhere
 POSTGRES_USER=authentik_db_user
 POSTGRES_DB=authentik_db
-AUTHENTIK_SECRET_KEY=yoursecretkey```
+AUTHENTIK_SECRET_KEY=yoursecretkey
+```
 
 17. Everything Docker-related should be done now, we can **compose again**
 
