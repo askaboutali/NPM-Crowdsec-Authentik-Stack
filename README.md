@@ -234,7 +234,7 @@ Afterwards just approve the enroll request in the dashboard :)
 
 # Testing
 
-> **Obligatory "DON'T TEST THIS LOCALLY" PSA.** Make a hotspot from your phone if you need to.
+> **DO NOT TEST FROM THE SAME MACHINE RUNNING THE STACK** - it'll always work :)
 
 1. **Open hello-test in a web browser**
 
