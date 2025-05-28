@@ -198,11 +198,11 @@ AUTHENTIK_SECRET_KEY=yoursecretkey
 > Give it a name - for example *nginx-hello-test* again. For slug, enter *hello-test*.
 > Choose the provider you just created. Click *Finish*.
 
-25. **Modify Authentik's Embedded Outpost** Just **move the application** you made for *hello-test* **to the right side and hit** ***Update***.
+25. **Modify Authentik's Embedded Outpost.** Just **move the application** you made for *hello-test* **to the right side and hit** ***Update***.
 
 26. ***IMPORTANT:*** **Open the provider you created in Authentik, and copy the Nginx (Proxy Manager) config.**
 
-27. Open the hello-test proxy provider in NPM, click Advanced and paste the config.
+27. **Open the hello-test proxy provider in NPM, click Advanced and paste the config.**
 
 > **DO NOT SAVE YET!**
 
