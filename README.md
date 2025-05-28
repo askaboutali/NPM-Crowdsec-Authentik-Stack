@@ -46,6 +46,7 @@ I offer **ABSOLUTELY ZERO WARRANTY**, and take **ABSOLUTELY NO RESPONSIBILTY** i
 >On my systems, I usually just make a user, give the user sudo priviliges and then do everything as that user, adjust stuff accordingly if needed
 
 1. First, **clone my repo**
+
 `git clone https://this repo`
 
 2. *This is almost definitely unnecessary, but idk*
