@@ -280,6 +280,8 @@ Afterwards just approve the enroll request in the dashboard :)
 
 > In other words, if the very last response is not *403* something is **VERY** wrong.
 
+> To unban yourself use ***sudo docker exec crowdsec cscli decisions delete -i your-ip-here***
+
 ## Issues
 
 I actually successfully deployed this exact set-up, but it is possible I screwed something up, or forgot something when making the repo. Feel free to open an **Issue**.
