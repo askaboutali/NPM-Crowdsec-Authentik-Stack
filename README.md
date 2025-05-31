@@ -187,7 +187,7 @@ AUTHENTIK_SECRET_KEY=yoursecretkey
 
 > At this point, unless you somehow magically got banned by Crowdsec already, you should be able to get to *hello-test* through the proxy.
 
-21. If everything works so far, **make a proxy host pointing to** ***authetik-server***
+21. If everything works so far, **make a proxy host pointing to** ***authentik-server***
 
 > hostname: authentik-server, port: 9443 (SSL port - use scheme: https)
 
