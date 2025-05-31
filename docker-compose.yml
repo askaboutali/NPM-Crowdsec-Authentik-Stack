@@ -238,4 +238,5 @@ networks:
     driver: bridge
 # Our internal network - use for services you want to protect
   internal_network:
+    name: internal_network
     driver: bridge
